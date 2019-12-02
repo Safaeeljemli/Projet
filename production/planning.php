@@ -418,37 +418,7 @@ include('footer.php');
 
     dp.treeEnabled = true;
     dp.treePreventParentUsage = true;
-    dp.resources = [
-        {name: "Double", id: "G1", expanded: true, children: [
-                {name: "Room 1", id: "A"},
-                {name: "Room 2", id: "B"},
-                {name: "Room 3", id: "C"},
-                {name: "Room 4", id: "D"}
-            ]
-        },
-        {name: "Single", id: "G2", expanded: true, children: [
-                {name: "Person 1", id: "E"},
-                {name: "Person 2", id: "F"},
-                {name: "Person 3", id: "G"},
-                {name: "Person 4", id: "H"}
-            ]
-        },
-        {name: "Twin", id: "G3", expanded: true, children: [
-                {name: "Tool 1", id: "I"},
-                {name: "Tool 2", id: "J"},
-                {name: "Tool 3", id: "K"},
-                {name: "Tool 4", id: "L"}
-            ]
-        },
-        {name: "Swites", id: "G4", expanded: true, children: [
-                {name: "Resource 1", id: "R1"},
-                {name: "Resource 2", id: "R2"},
-                {name: "Resource 3", id: "R3"},
-                {name: "Resource 4", id: "R4"}
-            ]
-        },
-    ];
-
+  
     dp.heightSpec = "Max";
     dp.height = 500;
     dp.separators = [

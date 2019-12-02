@@ -505,8 +505,8 @@
                     // event creating
                     // http://api.daypilot.org/daypilot-scheduler-ontimerangeselected/
                     dp.onTimeRangeSelected = function (args) {
-                        //var name = prompt("New event name:", "Event");
-                        //if (!name) return;
+                        var name = prompt("New event name:", "Event");
+                        if (!name) return;
 
                         var modal = new DayPilot.Modal();
                         modal.closed = function() {
