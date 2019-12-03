@@ -110,11 +110,8 @@ include('header.php');
                                                                     </td>
 
                                                                     <td width="20%">
-                                                                        <button name="deletecli" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
-                                                                            <i class="fa fa-trash"></i> Supprimer
-                                                                        </button>
-                                                                        <button type="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal" data-target="#suppCli<?php echo $client['idClient']; ?>">
-                                                                            <i class="fa fa-edit"></i>Confirmer
+                                                                        <button name="archiveclient" class="btnSuppDept btn btn-xs btn-info pull-right" title="archiver">
+                                                                            <i class="fa fa-archive"></i> Archiver
                                                                         </button>
                                                                         <button type="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal" data-target="#exampleModalCli<?php echo $client['idClient']; ?>">
                                                                             <i class="fa fa-edit"></i>Modifier
@@ -181,9 +178,10 @@ include('header.php');
                                                                                                     <label class='col-sm-6 control-label'> Sexe</label>
                                                                                                     <div class='col-sm-6'>
                                                                                                         <select name='sexe' class='form-control' value='<?php echo $client['sexe']; ?>'>
-                                                                                                           
+
                                                                                                             <option value='Femme'><?php echo $client['sexe']; ?></option>
-                                                                                                            <option value='Homme'><?php if($client['sexe']=='Femme') echo 'Homme'; else echo 'Femme'; ?></option>
+                                                                                                            <option value='Homme'><?php if ($client['sexe'] == 'Femme') echo 'Homme';
+                                                                    else echo 'Femme'; ?></option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
@@ -217,7 +215,8 @@ include('header.php');
                                                                                                     <div class='col-sm-6'>
                                                                                                         <select name='situationf' class='form-control' value='<?php echo $client['situationFamiliale']; ?>'>
                                                                                                             <option value='Celibataire'><?php echo $client['situationFamiliale']; ?>Célibataire</option>
-                                                                                                            <option value='Marié'><?php if($client['situationFamiliale']=='Célibataire') echo 'Marié'; else echo 'Célibataire'; ?>Marié</option>
+                                                                                                            <option value='Marié'><?php if ($client['situationFamiliale'] == 'Célibataire') echo 'Marié';
+                                                                    else echo 'Célibataire'; ?>Marié</option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
@@ -238,7 +237,7 @@ include('header.php');
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                            <?php } ?>
+<?php } ?>
 
                                                             <!--{% endfor %}-->
                                                         </tbody>

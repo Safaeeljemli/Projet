@@ -7,13 +7,13 @@ if (isset($_POST['archiveref'])) {
         $id = $_POST['idref'];
         $sql = "UPDATE reference SET statut=0 WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -26,13 +26,13 @@ if (isset($_POST['unarchiveref'])) {
         $id = $_POST['idre'];
         $sql = "UPDATE reference SET statut=1 WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:archive.php');
     } catch (PDOException $e) {
@@ -48,13 +48,13 @@ if (isset($_POST['editref'])) {
         $id = $_POST['idref'];
         $sql = "UPDATE reference SET nom='$n',couleur='$c' WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -67,13 +67,13 @@ if (isset($_POST['deleteref'])) {
         $id = $_POST['idre'];
         $sql = "DELETE FROM reference WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:archive.php');
     } catch (PDOException $e) {
@@ -88,13 +88,13 @@ if (isset($_POST['archivetypech'])) {
         $id = $_POST['idtch'];
         $sql = "UPDATE typechambre SET statut=0 WHERE idTc=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -107,13 +107,13 @@ if (isset($_POST['unarchivetypech'])) {
         $id = $_POST['idtc'];
         $sql = "UPDATE typechambre SET statut=1 WHERE idTc=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:	archive.php');
     } catch (PDOException $e) {
@@ -129,13 +129,13 @@ if (isset($_POST['edittypech'])) {
         $id = $_POST['idtch'];
         $sql = "UPDATE typechambre SET type='$n',nbreChambre=$nc,nbreMaxPax=$np WHERE idTc=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -151,13 +151,13 @@ if (isset($_POST['supptypech'])) {
             try {
                 $sql = "DELETE FROM typechambre WHERE idTc=$id";
 
-                // Prepare statement
+// Prepare statement
                 $stmt = $conn->prepare($sql);
 
-                // execute the query
+// execute the query
                 $stmt->execute();
 
-                // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
                 echo $stmt->rowCount() . " records UPDATED successfully";
                 header('location:archive.php');
             } catch (Exception $ex) {
@@ -180,13 +180,13 @@ if (isset($_POST['archivetyperes'])) {
         $id = $_POST['idtypere'];
         $sql = "UPDATE typereservation SET statut=0 WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -199,13 +199,13 @@ if (isset($_POST['unarchivetyperes'])) {
         $id = $_POST['idtyperes'];
         $sql = "UPDATE typereservation SET statut=1 WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:archive.php');
     } catch (PDOException $e) {
@@ -219,13 +219,13 @@ if (isset($_POST['unarchivetypech'])) {
         $id = $_POST['idtch'];
         $sql = "UPDATE typechambre SET statut=1 WHERE idTc=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -239,13 +239,13 @@ if (isset($_POST['edittyperes'])) {
         $id = $_POST['idtypere'];
         $sql = "UPDATE typereservation SET type='$n' WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -259,13 +259,13 @@ if (isset($_POST['deletetyperes'])) {
         $id = $_POST['idtyperes'];
         $sql = "UPDATE typereservation SET statut=0 WHERE id=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:archive.php');
     } catch (PDOException $e) {
@@ -288,13 +288,13 @@ if (isset($_POST['editcli'])) {
         $id = $_POST['idcl'];
         $sql = "UPDATE clients SET nom='$n', prenom='$p', sexe='$s', numTel=$tel, email='$e', situationFamiliale='$sf', pieceIdentite='$pi' WHERE idClient=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:clients.php');
     } catch (PDOException $e) {
@@ -310,15 +310,56 @@ if (isset($_POST['deletecli'])) {
         echo 'ttttttttttttt';
         $sql = "UPDATE clients SET statut=0 WHERE idClient=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:clients.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
+if (isset($_POST['archiveclient'])) {
+    try {
+        $id = $_POST['idcli'];
+
+        echo 'ttttttttttttt';
+        $sql = "UPDATE clients SET statut=0 WHERE idClient=$id";
+
+// Prepare statement
+        $stmt = $conn->prepare($sql);
+
+// execute the query
+        $stmt->execute();
+
+// echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+        header('location:clients.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
+
+if (isset($_POST['unarchiveclient'])) {
+    try {
+        $id = $_POST['idcli'];
+
+        echo 'ttttttttttttt';
+        $sql = "UPDATE clients SET statut=1 WHERE idClient=$id";
+
+// Prepare statement
+        $stmt = $conn->prepare($sql);
+
+// execute the query
+        $stmt->execute();
+
+// echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+        header('location:archive_clients.php');
     } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
@@ -333,13 +374,13 @@ if (isset($_POST['editcha'])) {
         $id = $_POST['idch'];
         $sql = "UPDATE chambre SET nomCode='$n', descriptif='$p' WHERE idChambre=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -351,13 +392,13 @@ if (isset($_POST['archivetypech'])) {
         $id = $_POST['idtch'];
         $sql = "UPDATE typechambre SET statut=0 WHERE idTc=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {
@@ -370,13 +411,13 @@ if (isset($_POST['archivecha'])) {
         $id = $_POST['idcha'];
         $sql = "UPDATE chambre SET statut=0 WHERE  idChambre=$id";
 
-        // Prepare statement
+// Prepare statement
         $stmt = $conn->prepare($sql);
 
-        // execute the query
+// execute the query
         $stmt->execute();
 
-        // echo a message to say the UPDATE succeeded
+// echo a message to say the UPDATE succeeded
         echo $stmt->rowCount() . " records UPDATED successfully";
         header('location:configuration.php');
     } catch (PDOException $e) {

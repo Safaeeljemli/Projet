@@ -65,6 +65,21 @@ session_start();
         <div class="shadow"></div>
         <div class="hideSkipLink">
         </div>
+        <?php
+        $stmt = $conn->prepare("SELECT * FROM reference ");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        $stmt2 = $conn->prepare("SELECT * FROM chambre ");
+        $stmt2->execute();
+        $result2 = $stmt2->fetchAll();
+
+
+        $chb = array();
+        $stmt3 = $conn->prepare('select * from typechambre where statut=1');
+        $stmt3->execute();
+        $result3 = $stmt3->fetchAll(PDO::FETCH_BOTH);
+        ?>
         <div class="main">
 
 
@@ -85,11 +100,7 @@ session_start();
                             <td>
                                 <select multiple class='form-control' name='typechamee'>
                                     <?php
-                                    $chb = array();
-                                    $stmt = $conn->prepare('select * from typechambre where statut=1');
-                                    $stmt->execute();
-                                    $chb = $stmt->fetchAll(PDO::FETCH_BOTH);
-                                    foreach ($chb as $ch) {
+                                    foreach ($result3 as $ch) {
                                         ?>
                                         <option  value="<?php echo $ch['idTc']; ?>" ><?php echo $ch['type']; ?></option>
                                     <?php } ?>
@@ -169,15 +180,7 @@ session_start();
         <div class="space">
             <a href="#" id="add-room">Ajouter une chambre</a>
         </div>
-        <?php
-        $stmt = $conn->prepare("SELECT * FROM reference ");
-        $stmt->execute();
-        $result = $stmt->fetchAll();
 
-        $stmt2 = $conn->prepare("SELECT * FROM chambre ");
-        $stmt2->execute();
-        $result2 = $stmt2->fetchAll();
-        ?>
 
         <div class="hide" style="display:none;">
             <form action="reservation.php" method="post" >
@@ -317,310 +320,315 @@ include('footer.php');
 
 
 <script>
-                                var dp = new DayPilot.Scheduler("dp");
+    var dp = new DayPilot.Scheduler("dp");
 
-                                // dp.height = 250;
-
-
-                                dp.allowEventOverlap = false;
-
-                                //dp.scale = "Day";
-                                //dp.startDate = new DayPilot.Date().firstDayOfMonth();
-                                dp.days = dp.startDate.daysInMonth();
-                                loadTimeline(DayPilot.Date.today().firstDayOfMonth());
+    // dp.height = 250;
 
 
-                                function treatAsUTC(date) {
-                                    var result = new Date(date);
-                                    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
-                                    return result;
-                                }
+    dp.allowEventOverlap = false;
 
-                                function daysBetween(startDate, endDate) {
-                                    var millisecondsPerDay = 24 * 60 * 60 * 1000;
-                                    return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
-                                }
+    //dp.scale = "Day";
+    //dp.startDate = new DayPilot.Date().firstDayOfMonth();
+    dp.days = dp.startDate.daysInMonth();
+    loadTimeline(DayPilot.Date.today().firstDayOfMonth());
 
 
+    function treatAsUTC(date) {
+        var result = new Date(date);
+        result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+        return result;
+    }
+
+    function daysBetween(startDate, endDate) {
+        var millisecondsPerDay = 24 * 60 * 60 * 1000;
+        return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
+    }
 
 
 
-                                function myFunction() {
-                                    //var start = document.getElementById("demo").innerHTML = "Hello World";
-                                    var start = document.getElementById("dateStart").value;
-                                    var end = document.getElementById("dateEnd").value;
-                                    var numjour = daysBetween(start, end);
-                                    // dp.days = dp.startDate.daysInMonth();
-                                    dp.days = numjour;
-                                    // console.log(dp.days)
-                                    // loadTimeline(DayPilot.Date.today());
-                                    var dateRecherche = document.getElementById('dateStart').value;
-                                    // console.log(h+"fdvd")
-                                    date = new DayPilot.Date(dateRecherche);
-
-                                    dp.scale = "Manual";
-                                    dp.timeline = [];
-                                    var start = date.getDatePart().addHours();
-                                    for (var i = 0; i < dp.days + 1; i++) {
-                                        dp.timeline.push({start: start.addDays(i), end: start.addDays(i + 1)});
-                                    }
-
-                                    // dp.cellWidthSpec = "Auto";
-                                    dp.update();
-
-                                }
-
-                                //dp.eventDeleteHandling = "Update";
-
-                                dp.timeHeaders = [
-                                    {groupBy: "Month", format: "MMMM yyyy"},
-                                    {groupBy: "Day", format: "d"}
-                                ];
-
-                                dp.eventHeight = 60;
-                                dp.bubble = new DayPilot.Bubble({});
-
-                                dp.rowHeaderColumns = [
-                                    {title: "Chambres :", width: 80}
-                                   
-                                ];
-
-                                dp.treeEnabled = true;
-                                dp.treePreventParentUsage = true;
-                                dp.resources = [
-                                    {name: "Double", id: "G1", expanded: true, children: [
-                                            {name: "Room 1", id: "A"},
-                                            {name: "Room 2", id: "B"},
-                                            {name: "Room 3", id: "C"},
-                                            {name: "Room 4", id: "D"}
-                                        ]
-                                    },
-                                    {name: "Single", id: "G2", expanded: true, children: [
-                                            {name: "Person 1", id: "E"},
-                                            {name: "Person 2", id: "F"},
-                                            {name: "Person 3", id: "G"},
-                                            {name: "Person 4", id: "H"}
-                                        ]
-                                    },
-                                    {name: "Twin", id: "G3", expanded: true, children: [
-                                            {name: "Tool 1", id: "I"},
-                                            {name: "Tool 2", id: "J"},
-                                            {name: "Tool 3", id: "K"},
-                                            {name: "Tool 4", id: "L"}
-                                        ]
-                                    },
-                                    {name: "Swites", id: "G4", expanded: true, children: [
-                                            {name: "Resource 1", id: "R1"},
-                                            {name: "Resource 2", id: "R2"},
-                                            {name: "Resource 3", id: "R3"},
-                                            {name: "Resource 4", id: "R4"}
-                                        ]
-                                    },
-                                ];
-
-                                dp.heightSpec = "Max";
-                                dp.height = 500;
-                                dp.separators = [
-                                    {location: new DayPilot.Date(), color: "red"}
-                                ];
-
-                                dp.onBeforeResHeaderRender = function (args) {
-                                   
-                                    args.resource.areas = [{
-                                            top: 3,
-                                            right: 4,
-                                            height: 14,
-                                            width: 14,
-                                            action: "JavaScript",
-                                            js: function (r) {
-                                                var modal = new DayPilot.Modal();
-                                                modal.onClosed = function (args) {
-                                                    loadResources();
-                                                };
-                                                modal.showUrl("room_edit.php?id=" + r.id);
-                                            },
-                                            v: "Hover",
-                                            css: "icon icon-edit",
-                                        }];
-                                };
-
-                                dp.onEventMoved = function (args) {
-                                    $.post("backend_move.php",
-                                            {
-                                                id: args.e.id(),
-                                                newStart: args.newStart.toString(),
-                                                newEnd: args.newEnd.toString(),
-                                                newResource: args.newResource
-                                            },
-                                            function (data) {
-                                                dp.message(data.message);
-                                            });
-                                };
-
-                                dp.onEventResized = function (args) {
-                                    $.post("backend_resize.php",
-                                            {
-                                                id: args.e.id(),
-                                                newStart: args.newStart.toString(),
-                                                newEnd: args.newEnd.toString()
-                                            },
-                                            function () {
-                                                dp.message("Resized.");
-                                            });
-                                };
-
-                                dp.onEventDeleted = function (args) {
-                                    $.post("backend_delete.php",
-                                            {
-                                                id: args.e.id()
-                                            },
-                                            function () {
-                                                dp.message("Deleted.");
-                                            });
-                                };
-                                dp.contextMenu = new DayPilot.Menu({items: [
-                                 {text:"Edit", onClick: function(args) { dp.events.edit(args.source); } },
-                                 {text:"Delete", onClick: function(args) { dp.events.remove(args.source); } },
-                                 {text:"-"},
-                                 {text:"Select", onClick: function(args) { dp.multiselect.add(args.source); } },
-                                 ]});
-
-                               
-                                dp.onTimeRangeSelected = function (args) {
-                                    var name = prompt("Nouvelle réservation:", "Event");
-                                    if (!name)
-                                        return;
-                                    else print("rjjj");
-
-                                    var modal = new DayPilot.Modal();
-                                    modal.closed = function () {
-                                        dp.clearSelection();
-
-                                        var data = this.result;
-                                        if (data && data.result === "OK") {
-                                            loadEvents();
-                                        }
-                                    };
-                                    modal.showUrl("new.php?start=" + args.start + "&end=" + args.end + "&resource=" + args.resource);
-
-                                    $("div.hide").toggle();
-                                    var str1 = args.start.value;
-                                    var res1 = str1.split("T00:00:00", 1);
-                                    var str2 = args.end.value;
-                                    var res2 = str2.split("T00:00:00", 1);
-
-                                    document.getElementById("dated").value = res1;
-                                    document.getElementById("datef").value = res2;
-                                    var numjour = daysBetween(res1, res2);
-                                    document.getElementById("nbrNuit").value = numjour;
-                                    document.getElementById("chambre").value = args.resource;
-                                    // window.scrollBy(100, 900);
 
 
-                                };
+    function myFunction() {
+        //var start = document.getElementById("demo").innerHTML = "Hello World";
+        var start = document.getElementById("dateStart").value;
+        var end = document.getElementById("dateEnd").value;
+        var numjour = daysBetween(start, end);
+        // dp.days = dp.startDate.daysInMonth();
+        dp.days = numjour;
+        // console.log(dp.days)
+        // loadTimeline(DayPilot.Date.today());
+        var dateRecherche = document.getElementById('dateStart').value;
+        // console.log(h+"fdvd")
+        date = new DayPilot.Date(dateRecherche);
 
-                                dp.onEventClick = function (args) {
-                                    var modal = new ayPilot.Modal.prompt("New event name:", "New Event");
-                                    modal.closed = function () {
-                                        // reload all events
-                                        var data = this.result;
-                                        if (data && data.result === "OK") {
-                                            loadEvents();
-                                        }
-                                    };
-                                    modal.showUrl("editb.php?id=" + args.e.id());
-                                };
-                                dp.onBeforeEventRender = function (args) {
-                                    // console.log(args.e.start)
-                                    var start = new DayPilot.Date(args.e.start);
-                                    var end = new DayPilot.Date(args.e.end);
+        dp.scale = "Manual";
+        //dp.timeline = [];
+        var start = date.getDatePart().addHours();
+        for (var i = 0; i < dp.days + 1; i++) {
+            dp.timeline.push({start: start.addDays(i), end: start.addDays(i + 1)});
+        }
 
-                                    var today = DayPilot.Date.today();
-                                    var now = new DayPilot.Date();
+        // dp.cellWidthSpec = "Auto";
+        dp.update();
 
-                                    args.e.html = '<strong style="font-size:15px;">' + args.e.text + '</strong>';
+    }
 
-                                    switch (args.e.typerRs) {
-                                        case "Reservation":
-                                            args.e.barColor = 'red';
-                                            break;
-                                        case "RPCC":
-                                            args.e.barColor = 'blue';
-                                            break;
-                                        case "option":
-                                            args.e.barColor = 'orange';
-                                            break;
-                                        default:
-                                            args.e.barColor = 'gray';
-                                            break;
-                                    }
+    //dp.eventDeleteHandling = "Update";
+
+    dp.timeHeaders = [
+        {groupBy: "Month", format: "MMMM yyyy"},
+        {groupBy: "Day", format: "d"}
+    ];
+
+    dp.eventHeight = 60;
+    dp.bubble = new DayPilot.Bubble({});
+
+    dp.rowHeaderColumns = [
+        {title: "Chambres :", width: 80}
+
+    ];
+
+    dp.treeEnabled = true;
+    dp.treePreventParentUsage = true;
+    dp.resources = [
+        {name: "<?php foreach ($result2 as $rowC) {
+            echo "<option value='" . $rowC['idChambre'] . "'>" . $rowC['nomCode'] . "</option>";
+}
+?>"
+        },
+        {name: "Single", id: "G2", expanded: true, children: [
+                {name: "Person 1", id: "E"},
+                {name: "Person 2", id: "F"},
+                {name: "Person 3", id: "G"},
+                {name: "Person 4", id: "H"}
+            ]
+        },
+        {name: "Twin", id: "G3", expanded: true, children: [
+                {name: "Tool 1", id: "I"},
+                {name: "Tool 2", id: "J"},
+                {name: "Tool 3", id: "K"},
+                {name: "Tool 4", id: "L"}
+            ]
+        },
+        {name: "Swites", id: "G4", expanded: true, children: [
+                {name: "Resource 1", id: "R1"},
+                {name: "Resource 2", id: "R2"},
+                {name: "Resource 3", id: "R3"},
+                {name: "Resource 4", id: "R4"}
+            ]
+        },
+    ];
+
+    dp.heightSpec = "Max";
+    dp.height = 500;
+    dp.separators = [
+        {location: new DayPilot.Date(), color: "red"}
+    ];
+
+    dp.onBeforeResHeaderRender = function (args) {
+
+        args.resource.areas = [{
+                top: 3,
+                right: 4,
+                height: 14,
+                width: 14,
+                action: "JavaScript",
+                js: function (r) {
+                    var modal = new DayPilot.Modal();
+                    modal.onClosed = function (args) {
+                        loadResources();
+                    };
+                    modal.showUrl("room_edit.php?id=" + r.id);
+                },
+                v: "Hover",
+                css: "icon icon-edit",
+            }];
+    };
+
+    dp.onEventMoved = function (args) {
+        $.post("backend_move.php",
+                {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString(),
+                    newResource: args.newResource
+                },
+                function (data) {
+                    dp.message(data.message);
+                });
+    };
+
+    dp.onEventResized = function (args) {
+        $.post("backend_resize.php",
+                {
+                    id: args.e.id(),
+                    newStart: args.newStart.toString(),
+                    newEnd: args.newEnd.toString()
+                },
+                function () {
+                    dp.message("Resized.");
+                });
+    };
+
+    dp.onEventDeleted = function (args) {
+        $.post("backend_delete.php",
+                {
+                    id: args.e.id()
+                },
+                function () {
+                    dp.message("Deleted.");
+                });
+    };
+    dp.contextMenu = new DayPilot.Menu({items: [
+            {text: "Edit", onClick: function (args) {
+                    dp.events.edit(args.source);
+                }},
+            {text: "Delete", onClick: function (args) {
+                    dp.events.remove(args.source);
+                }},
+            {text: "-"},
+            {text: "Select", onClick: function (args) {
+                    dp.multiselect.add(args.source);
+                }},
+        ]});
 
 
-                                    args.e.html = "<div>" + args.e.html + "<br /><span style='color:black;'></span></div>";
+    dp.onTimeRangeSelected = function (args) {
+        var name = prompt("Nouvelle réservation:", "Event");
+        if (!name)
+            return;
+        else
+            print("rjjj");
 
-                                    var paid = args.e.paid;
-                                    var paidColor = "#aaaaaa";
+        var modal = new DayPilot.Modal();
+        modal.closed = function () {
+            dp.clearSelection();
 
-                                    args.e.areas = [
-                                        {height: 16, bottom: 10, right: 4, html: "<div style='height: 16px ; font-size: 12pt;color:black;'>" + args.e.nomR + "</div>", v: "Visible"},
-                                    ];
+            var data = this.result;
+            if (data && data.result === "OK") {
+                loadEvents();
+            }
+        };
+        modal.showUrl("new.php?start=" + args.start + "&end=" + args.end + "&resource=" + args.resource);
 
-                                };
+        $("div.hide").toggle();
+        var str1 = args.start.value;
+        var res1 = str1.split("T00:00:00", 1);
+        var str2 = args.end.value;
+        var res2 = str2.split("T00:00:00", 1);
+
+        document.getElementById("dated").value = res1;
+        document.getElementById("datef").value = res2;
+        var numjour = daysBetween(res1, res2);
+        document.getElementById("nbrNuit").value = numjour;
+        document.getElementById("chambre").value = args.resource;
+        // window.scrollBy(100, 900);
 
 
-                                dp.init();
+    };
 
-                                loadResources();
-                                loadEvents();
+    dp.onEventClick = function (args) {
+        var modal = new ayPilot.Modal.prompt("New event name:", "New Event");
+        modal.closed = function () {
+            // reload all events
+            var data = this.result;
+            if (data && data.result === "OK") {
+                loadEvents();
+            }
+        };
+        modal.showUrl("editb.php?id=" + args.e.id());
+    };
+    dp.onBeforeEventRender = function (args) {
+        // console.log(args.e.start)
+        var start = new DayPilot.Date(args.e.start);
+        var end = new DayPilot.Date(args.e.end);
 
-                                function loadTimeline(date) {
-                                    dp.scale = "Manual";
-                                    dp.timeline = [];
-                                    var start = date.getDatePart().addHours();
+        var today = DayPilot.Date.today();
+        var now = new DayPilot.Date();
 
-                                    for (var i = 0; i < dp.days + 1; i++) {
-                                        dp.timeline.push({start: start.addDays(i), end: start.addDays(i + 1)});
-                                    }
-                                    dp.update();
-                                }
+        args.e.html = '<strong style="font-size:15px;">' + args.e.text + '</strong>';
 
-                                function loadEvents() {
-                                    var start = dp.visibleStart();
-                                    var end = dp.visibleEnd();
+        switch (args.e.typerRs) {
+            case "Reservation":
+                args.e.barColor = 'red';
+                break;
+            case "RPCC":
+                args.e.barColor = 'blue';
+                break;
+            case "option":
+                args.e.barColor = 'orange';
+                break;
+            default:
+                args.e.barColor = 'gray';
+                break;
+        }
 
-                                    $.post("backend_events.php",
-                                            {
-                                                start: start.toString(),
-                                                end: end.toString()
-                                            },
-                                            function (data) {
-                                                dp.events.list = data;
-                                                // console.log(dp.events.list)
-                                                dp.cellWidth = 40;  // reset for "Fixed" mode
-                                                dp.rowMinHeight = 10;
-                                                dp.cellWidthSpec = "Auto";
 
-                                                dp.update();
-                                            }
-                                    );
-                                }
+        args.e.html = "<div>" + args.e.html + "<br /><span style='color:black;'></span></div>";
 
-                                function loadResources() {
-                                    $.post("backend_rooms.php",
-                                            {capacity: $("#filter").val()},
-                                            function (data) {
+        var paid = args.e.paid;
+        var paidColor = "#aaaaaa";
 
-                                                dp.resources = data;
+        args.e.areas = [
+            {height: 16, bottom: 10, right: 4, html: "<div style='height: 16px ; font-size: 12pt;color:black;'>" + args.e.nomR + "</div>", v: "Visible"},
+        ];
 
-                                                dp.update();
-                                            });
-                                }
+    };
 
-                                $(document).ready(function () {
-                                    $("#filter").change(function () {
-                                        loadResources();
-                                    });
-                                });
+
+    dp.init();
+
+    loadResources();
+    loadEvents();
+
+    function loadTimeline(date) {
+        dp.scale = "Manual";
+        dp.timeline = [];
+        var start = date.getDatePart().addHours();
+
+        for (var i = 0; i < dp.days + 1; i++) {
+            dp.timeline.push({start: start.addDays(i), end: start.addDays(i + 1)});
+        }
+        dp.update();
+    }
+
+    function loadEvents() {
+        var start = dp.visibleStart();
+        var end = dp.visibleEnd();
+
+        $.post("backend_events.php",
+                {
+                    start: start.toString(),
+                    end: end.toString()
+                },
+                function (data) {
+                    dp.events.list = data;
+                    // console.log(dp.events.list)
+                    dp.cellWidth = 40;  // reset for "Fixed" mode
+                    dp.rowMinHeight = 10;
+                    dp.cellWidthSpec = "Auto";
+
+                    dp.update();
+                }
+        );
+    }
+
+    function loadResources() {
+        $.post("backend_rooms.php",
+                {capacity: $("#filter").val()},
+                function (data) {
+
+                    dp.resources = data;
+
+                    dp.update();
+                });
+    }
+
+    $(document).ready(function () {
+        $("#filter").change(function () {
+            loadResources();
+        });
+    });
 
 </script>
 

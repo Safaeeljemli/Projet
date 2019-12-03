@@ -50,11 +50,14 @@
                                 <li><a><i class="fa fa-bar-chart-o"></i> Statistique </a>
 
                                 </li>
-                                <li><a href="profile.php"><i class="fa fa-user"></i> Profil </a>
+                                <li><a href="profile.php"><i class="fa fa-user"></i> Profile </a>
 
                                 </li>
-                                <li><a href="archive.php"><i class="fa fa-archive"></i> Archive </a>
-
+                                <li><a><i class="fa fa-archive"></i> Archive <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="archive.php">Tables statiques</a></li>
+                                        <li><a href="archive_clients.php">Clients</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>

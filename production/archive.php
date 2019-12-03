@@ -81,10 +81,11 @@ include('header.php');
                                                                     <input disabled type="color" name="idre" value="<?php echo $reference['couleur']; ?>" />
                                                                 </td>
                                                                 <td width="20%">
+                                                                    <!--
                                                                     <button name="deleteref" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
                                                                         <i class="fa fa-trash"></i> Supprimer
                                                                     </button>
-
+-->
 
                                                                     <button name="unarchiveref" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
                                                                         <i class="fa fa-undo"></i> Desarchiver
@@ -143,10 +144,7 @@ include('header.php');
                                                                        <!-- <button data-toggle="modal" data-target="#deletetypechooooo" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
                                                                             <i class="fa fa-trash"></i> Supprimer
                                                                         </button>-->
-                                                                        <button type="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal" data-target="#supprModaltypCh<?php echo $typeCh['idTc']; ?>">
-                                                                            <i class="fa fa-edit"></i>Modifier
-                                                                        </button>
-                                                                       <input type="button" name="supptypech" onclick="deletetype(<?php echo $typeCh['idTc']; ?>)" name="Delete" value="Delete">
+                                                                       
                                                                         <ul class="nav navbar-right panel_toolbox">
                                                                             <button name="unarchivetypech" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
                                                                                 <i class="fa fa-undo"></i> Desarchiver
@@ -167,7 +165,7 @@ include('header.php');
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
                                     <div class="x_title">
-                                        <h2 style="color:black;">Chambres</h2>
+                                        <h2 >Chambres</h2>
 
                                         <div class="clearfix"></div>
                                     </div>
@@ -220,9 +218,11 @@ include('header.php');
                                                                 <td><?php echo $chambre['capacity']; ?>
                                                                 </td>
                                                                 <td width="20%">
+                                                                    <!--
                                                                     <button name="deletecha" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
                                                                         <i class="fa fa-trash"></i> Supprimer
                                                                     </button>
+                                                                    -->
 
                                                                     <button name="unarchivecha" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
                                                                         <i class="fa fa-undo"></i> Desarchiver
@@ -244,7 +244,7 @@ include('header.php');
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="profile-tab">
                                     <div class="x_title">
-                                        <h2 style="color:black;">Types de reservations</h2>
+                                        <h2>Types de reservations</h2>
 
                                         <div class="clearfix"></div>
                                     </div>
@@ -275,10 +275,11 @@ include('header.php');
                                                                     <input disabled type="color" name="idre" value="<?php echo $typeRes['couleur']; ?>" />
                                                                 </td>
                                                                 <td width="20%">
+                                                                    <!--
                                                                     <button name="deletetyperes" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
                                                                         <i class="fa fa-trash"></i> Supprimer
                                                                     </button>
-
+                                                                    -->
                                                                     <button name="unarchivetyperes" class="btnSuppDept btn btn-xs btn-info pull-right"  title="Desarchiver">
                                                                         <i class="fa fa-undo"></i> Desarchiver
                                                                     </button>
@@ -299,6 +300,7 @@ include('header.php');
                                     </div>
                                 </div>
 
+                              
                             </div>
                         </div>
 
