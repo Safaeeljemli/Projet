@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 02 Décembre 2019 à 15:33
+-- Généré le :  Mar 03 Décembre 2019 à 12:10
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -55,22 +55,9 @@ CREATE TABLE `chambre` (
 --
 
 INSERT INTO `chambre` (`idChambre`, `nomCode`, `descriptif`, `statut`, `capacity`, `idtypechambre`) VALUES
-(8, 'chambre1', '1er etage', 1, 2, 4),
-(9, 'cham3', '2eme etage', 1, 3, 6),
-(10, 'cham2', '1er etage', 1, 2, 5),
-(14, '4444', 'rrrrr', 1, 2, 4),
-(15, 'eerrrrr', 'rrrrr', 1, 2, 6),
-(16, 'uuyuvj', 'rrrrr', 1, 2, 6),
-(17, 'ooooooooo', 'rrrrr', 0, 2, 6),
-(18, 'rhtyuysdzgfv', 'rrrrr', 0, 2, 6),
-(19, 'eeeeeeeeeee', 'ffff', 1, 3, 5),
-(20, 'gugyygy', 'ppppp', 1, 11, 5),
-(21, 'uuu', 'sfsfsfs', 0, 1, 6),
-(22, 'uuu', 'sfsfsfs', 1, 1, 6),
-(23, 'jiugyugygyu', 'zza', 1, 5, 5),
-(24, 'yttttt', 'fgg', 1, 2, 4),
-(25, 'oooioo', 'lllllllll', 1, 3, 5),
-(26, 'oooo', 'plpl', 0, 3, 4);
+(8, 'chambre1', '1er etage', 0, 2, 4),
+(9, 'cham3', '2eme etage', 0, 3, 6),
+(10, 'cham2', '1er etage', 1, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -121,7 +108,7 @@ CREATE TABLE `reference` (
 INSERT INTO `reference` (`id`, `nom`, `couleur`, `statut`) VALUES
 (10, 'Direct', '#30cf74', 0),
 (11, 'Expedia', '#5ba4a0', 0),
-(16, 'rouge', '#ff0000', 1);
+(16, 'rouge', '#ff0000', 0);
 
 -- --------------------------------------------------------
 
@@ -177,8 +164,8 @@ CREATE TABLE `typechambre` (
 --
 
 INSERT INTO `typechambre` (`idTc`, `type`, `nbrChambre`, `nbreMaxPax`, `statut`) VALUES
-(4, 'double', 4, 2, 1),
-(5, 'single', 2, 1, 1),
+(4, 'double', 4, 2, 0),
+(5, 'single', 2, 1, 0),
 (6, 'triple', 6, 3, 1);
 
 -- --------------------------------------------------------
@@ -200,9 +187,9 @@ CREATE TABLE `typereservation` (
 
 INSERT INTO `typereservation` (`id`, `type`, `couleur`, `statut`) VALUES
 (2, 'typeres5', '', 0),
-(3, 'Typereservation', '#ecdb40', 1),
+(3, 'Typereservation', '#ecdb40', 0),
 (4, 'eeee', '#01feeb', 0),
-(5, 'uuuuu', '#e2e089', 1),
+(5, 'uuuuu', '#e2e089', 0),
 (6, 'ooooooooooooooooooooo', '#c8eeec', 1),
 (7, 'tttttt', '#13a451', 1);
 
@@ -214,23 +201,24 @@ INSERT INTO `typereservation` (`id`, `type`, `couleur`, `statut`) VALUES
 
 CREATE TABLE `users` (
   `id` int(20) NOT NULL,
-  `uid` varchar(50) COLLATE utf8_bin NOT NULL,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL,
   `email` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `type` varchar(20) COLLATE utf8_bin NOT NULL,
-  `pwd` varchar(100) COLLATE utf8_bin NOT NULL,
+  `type` int(20) NOT NULL DEFAULT '0',
+  `pwd` varchar(300) COLLATE utf8_bin NOT NULL,
   `nom_complet` varchar(30) COLLATE utf8_bin NOT NULL,
   `tel` int(20) NOT NULL,
-  `img` varchar(50) COLLATE utf8_bin DEFAULT NULL
+  `img` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `blocked` int(11) NOT NULL DEFAULT '0',
+  `admin` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `uid`, `email`, `type`, `pwd`, `nom_complet`, `tel`, `img`) VALUES
-(1, 'admin', 'hb@hotm.fr', 'admin', 'admin1', 'h&b web', 6000000, ''),
-(5, 'admin2', 'admin@gmail.com', 'admin', '$2y$12$zl/LzHs4bVy.kUiAM10l3OLM9kE8j74BMozrDBdZS7mEJOXeUDptK', 'hb web', 6200, NULL),
-(6, 'badr', 'badr@gmmail.com', 'admin', 'ben', 'benkhazra badr', 627790080, NULL);
+INSERT INTO `users` (`id`, `username`, `email`, `type`, `pwd`, `nom_complet`, `tel`, `img`, `blocked`, `admin`) VALUES
+(1, 'safa', 'eljemlisafae@gmail.com', 0, 'safa', 'EL JEMLI Safae', 675765432, NULL, 0, 1),
+(7, 'badr', 'badr@gmail.com', 0, '$2y$12$cJIUp.IwoPWICIHD3l9S7.V.HRj5FEwP3kUV6AwtGbLx6P80tlwaC', 'badr', 98765432, '0', 0, 1);
 
 --
 -- Index pour les tables exportées
@@ -343,7 +331,7 @@ ALTER TABLE `typereservation`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --

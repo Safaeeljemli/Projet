@@ -59,6 +59,32 @@ if (isset($_POST['editref'])) {
         echo $sql . "<br>" . $e->getMessage();
     }
 }
+//********************************************user *******************
+
+if (isset($_POST['edituser'])) {
+    try {
+        $id = $_POST['id'];
+        $nomComplet = $_POST['nomuser'];
+        $username = $_POST['username'];
+        $emailuser = $_POST['emailuser'];
+        $typeuser = $_POST['typeuser'];
+        $teluser = $_POST['teluser'];
+        $adminuser = $_POST['adminuser'];
+        $sql = "UPDATE users SET username='$username',email='$emailuser',type='$typeuser',nom_complet='$nomComplet',tel='$teluser',admin='$adminuser' WHERE id=$id";
+
+        // Prepare statement
+        $stmt = $conn->prepare($sql);
+
+        // execute the query
+        $stmt->execute();
+
+        // echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+        header('location:admin1.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
 
 /* * ****** Types chambre ********* */
 if (isset($_POST['archivetypech'])) {

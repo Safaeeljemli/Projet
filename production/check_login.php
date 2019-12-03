@@ -18,12 +18,12 @@ if(isset($_POST['mailuid']) && isset($_POST['pwd']))
        
 
         if ($password==$user['pwd'])
-        {
+        {/*
             session_start();
 			$_SESSION['userId']=$user['id'];
             $_SESSION['userUid']=$user['uid'];
             $_SESSION['nom_complet']=$user['nom_complet'];
-            
+            */
 			header("Location: dashboard.php?login=success");
 			exit();
         } 

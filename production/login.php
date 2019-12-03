@@ -72,7 +72,7 @@ input{
 	<input type="text" placeholder="Nom d'utilisateur ou email" name="mailuid" required>
 	<br>
 	<input type="Password" placeholder="Mot de passe" name="pwd" required>
-	<label class="forget"><a href="#">Mot de passe oublié?</a></label><br>
+        <label class="forget"><a href="resetpassword"><center>Mot de passe oublié?</center></a></label><br>
 	<input type="submit" name="sbutton" value="Se connecter" class="btn" style="margin-left: 8;">
 
 </form>

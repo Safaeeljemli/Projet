@@ -43,57 +43,106 @@ include('dbh.inc.php');
 
 
 
-<div class="modal fade fixed" id="ModalAjoutChambre" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade fixed" id="ModalAjoutRef" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header well">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h3>Ajout d'une nouvelle Chambre</h3>
+                <h3>Ajout d'une nouvelle référence</h3>
             </div>
             <form class='form-horizontal' method="post" action="add.php">
 
                 <div class='modal-body'>
                     <div class='form-group'>
-                        <label class='col-sm-4 control-label'> Nom/Code</label>
+                        <label class='col-sm-4 control-label'> Nom</label>
                         <div class='col-sm-6'>
-                            <input type='text' class='form-control' name='nomchambre'/>
+                            <input type='text' class='form-control' name='nomref'/>
                         </div>
                     </div>
                     <div class='form-group'>
-                        <label class='col-sm-4 control-label'> Descriptif</label>
+                        <label class='col-sm-4 control-label'> Couleur</label>
                         <div class='col-sm-6'>
-                            <input type='text' class='form-control' name='descriptifch'/>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <label class='col-sm-4 control-label'> Type</label>
-                        <div class='col-sm-6'>
-                            <select multiple class='form-control' name='typechambre'>
-                                <?php
-                                $chb = array();
-                                $stmt = $conn->prepare('select * from typechambre where statut=1');
-                                $stmt->execute();
-                                $chb = $stmt->fetchAll(PDO::FETCH_BOTH);
-                                foreach ($chb as $ch) {
-                                    ?>
-                                    <option  value="<?php echo $ch['idTc']; ?>"><?php echo $ch['type']; ?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <label class='col-sm-4 control-label'> Capacité</label>
-                        <div class='col-sm-6'>
-                            <input type='number' class='form-control' name='capacitechambre'/>
+                            <input type='color' class='form-control' name='couleurref' value="#ff0000"/>
                         </div>
                     </div>
                 </div>
                 <div class='modal-footer'>
                     <div class='pull-right'>
                         <div id='envoyer'>
-                            <button type='submit' class='btn btn-primary' name='addchambre' value='✔' style='float: right'>Enregistrer</button>
+                            <button type='submit' class='btn btn-primary' name='addref' value='✔' style='float: right'>Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade fixed" id="ModalAjoutUtilisateur" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header well">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>Ajout d'un nouveau Utilisateur</h3>
+            </div>
+            <form class='form-horizontal' method="post" action="add.php">
+
+                <div class='modal-body'>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> Nom Complet</label>
+                        <div class='col-sm-6'>
+                            <input type='text' class='form-control' name='nomuser'/>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> User name</label>
+                        <div class='col-sm-6'>
+                            <input type='text' class='form-control' name='name'/>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> Email</label>
+                        <div class='col-sm-6'>
+                            <input type='text' class='form-control' name='emailuser'/>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> Password</label>
+                        <div class='col-sm-6'>
+                            <input type='password' class='form-control' name='pswuser'/>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> Type</label>
+                        <div class='col-sm-6'>
+                            <input type='text' class='form-control' name='type'/>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> Tél</label>
+                        <div class='col-sm-6'>
+                            <input type='text' class='form-control' name='tel'/>
+                        </div>
+                    </div>
+                    <div class='form-group'>
+                        <label class='col-sm-4 control-label'> Admin</label>
+                        <div class='col-sm-6'>
+                            <input type='text' class='form-control' name='admin'/>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class='modal-footer'>
+                    <div class='pull-right'>
+                        <div id='envoyer'>
+                            <button type='submit' class='btn btn-primary' name='adduser' value='✔' style='float: right'>Enregistrer</button>
                         </div>
                     </div>
                 </div>
@@ -266,7 +315,7 @@ include('dbh.inc.php');
                     <div class='pull-right'>
                         <div id='envoyer'>
                             <button type='submit' class='btn btn-primary' name='addclt' value='✔' style='float: right'>Enregistrer</button>
-                            
+
                         </div>
                     </div>
                 </div>

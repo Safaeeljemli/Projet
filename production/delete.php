@@ -41,6 +41,47 @@ if (isset($_POST['unarchiveref'])) {
 }
 
 
+
+// ++++++++++++ user
+if (isset($_POST['archiveuser'])) {
+    try {
+        $id = $_POST['iduser'];
+        $sql = "UPDATE users SET blocked=1 WHERE id=$id";
+        echo $id;
+// Prepare statement
+        $stmt = $conn->prepare($sql);
+
+// execute the query
+        $stmt->execute();
+
+// echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+        header('location:admin1.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
+
+if (isset($_POST['unarchiveuser'])) {
+    try {
+        $id = $_POST['iduser'];
+        $sql = "UPDATE reference SET statut=1 WHERE id=$id";
+
+// Prepare statement
+        $stmt = $conn->prepare($sql);
+
+// execute the query
+        $stmt->execute();
+
+// echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+        header('location:admin1.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
+
+
 if (isset($_POST['editref'])) {
     try {
         $n = $_POST['nomref'];

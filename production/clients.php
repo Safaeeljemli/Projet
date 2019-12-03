@@ -180,8 +180,7 @@ include('header.php');
                                                                                                         <select name='sexe' class='form-control' value='<?php echo $client['sexe']; ?>'>
 
                                                                                                             <option value='Femme'><?php echo $client['sexe']; ?></option>
-                                                                                                            <option value='Homme'><?php if ($client['sexe'] == 'Femme') echo 'Homme';
-                                                                    else echo 'Femme'; ?></option>
+                                                                                                            <option value='Homme'><?php if ($client['sexe'] == 'Femme') echo 'Homme'; else echo 'Femme'; ?></option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>

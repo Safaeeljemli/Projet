@@ -15,6 +15,27 @@ if (isset($_POST['addref'])) {
     }
 }
 
+if (isset($_POST['adduser'])) {
+    try {
+        $n = $_POST['nomuser'];
+        $usrn = $_POST['name'];
+        $mail = $_POST['emailuser'];
+        $pwd = $_POST['pswuser'];
+        $hpwd=password_hash('$pwd',PASSWORD_BCRYPT, array( 'cost' => 12 ));
+        $type = $_POST['type'];
+        $tel = $_POST['tel'];
+        $admin = $_POST['admin'];
+        $sql = "INSERT INTO users (username, email, type, pwd, nom_complet, tel, img, blocked, admin) VALUES ( '$usrn','$mail', '$type','$hpwd','$n', '$tel', '0', '0','$admin')";
+        // use exec() because no results are returned
+        $conn->exec($sql);
+        echo "New record created successfully";
+        header('location:admin1.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
+
+
 if (isset($_POST['addtypech'])) {
     try {
         $n = $_POST['typech'];

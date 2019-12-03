@@ -14,7 +14,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Profil</h3>
+                <h3>Profile</h3>
             </div>
 
            
@@ -50,7 +50,7 @@
 							
 							
 							<button type="button" style="margin-left:30px;" class="btn btn-success" data-toggle="modal" data-target="#exampleModalTypCh">
-								<i class="fa fa-edit"></i>Modifier le profil
+								<i class="fa fa-edit"></i>Modifier le profile
 							</button>
 
 																							<div class="modal fade fixed" aria-labelledby="myModalLabel" id="exampleModalTypCh" tabindex="-1" role="dialog" aria-hidden="true">
