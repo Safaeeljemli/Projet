@@ -89,11 +89,21 @@ include('header.php');
                                                                 </td>
                                                                 <td><?php echo $user['email']; ?>
                                                                 </td>
-                                                                <td><?php if ($user['type'] == '1') echo 'En ligne'; else echo 'Hors ligne'; ?>
+                                                                <td><?php
+                                                                    if ($user['type'] == '1')
+                                                                        echo 'En ligne';
+                                                                    else
+                                                                        echo 'Hors ligne';
+                                                                    ?>
                                                                 </td>
                                                                 <td><?php echo $user['tel']; ?>
                                                                 </td>
-                                                                <td><?php if ($user['admin'] == '1') echo 'Admin'; else echo '-----'; ?> 
+                                                                <td><?php
+                                                                    if ($user['admin'] == '1')
+                                                                        echo 'Admin';
+                                                                    else
+                                                                        echo '-----';
+                                                                    ?> 
                                                                 </td>
                                                                 <td width="20%">
                                                                     <button name="archiveuser" class="btnSuppDept btn btn-xs btn-info pull-right" title="Blocker">
@@ -186,7 +196,7 @@ include('header.php');
 
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
                                     <div class="x_title">
-                                        <h2>Historique</h2>
+                                        <h2>Journale des modifications</h2>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li>
                                                 <button class="btn btn-xs btn-success" title="Ajouter" data-toggle="modal" data-target="#ModalAjoutTypeChb"><i class="fa fa-plus"></i> Ajouter</button>
@@ -200,180 +210,173 @@ include('header.php');
                                                 <table id="table1" class="table table-striped table-bordered " cellspacing="0" width="100%">
                                                     <thead style="background:#4B5F71;color:white;">
                                                         <tr>
-                                                            <th>Type </th>
-                                                            <th>Nombre de chambres </th>
-                                                            <th>Nombre max de pax </th>
-                                                            <th width="25%"> </th>
+                                                            <th>Utilisateur </th>
+                                                            <th>Type Modification </th>
+                                                            <th>Date Modification</th>
+                                                            <th>Description </th>
+                                                            <th width="25%">Option </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <!--{% for dep in dep %}-->
                                                         <?php
-                                                        $stmt = $conn->prepare('select * from typechambre where statut=1');
+                                                        $stmt = $conn->prepare('select * from journale');
                                                         $stmt->execute();
-                                                        $typesCh = $stmt->fetchAll(PDO::FETCH_BOTH);
-                                                        foreach ($typesCh as $typeCh) {
+                                                        $journales = $stmt->fetchAll(PDO::FETCH_BOTH);
+                                                        foreach ($journales as $journale) {
+                                                            
+                                                            
                                                             ?>
                                                             <tr>
-                                                                <td><?php echo $typeCh['type']; ?>
-                                                                    <input type="hidden" name="idtc" value="<?php echo $typeCh['idTc']; ?>" />
-                                                                </td>
-                                                                <td><?php echo $typeCh['nbrChambre']; ?>
-                                                                </td>
-                                                                <td><?php echo $typeCh['nbreMaxPax']; ?>
-                                                                </td>
-                                                                <td width="20%">
-                                                                    <button name="archivetypech" class="btnSuppDept btn btn-xs btn-info pull-right" title="archiver">
-                                                                        <i class="fa fa-archive"></i> Archiver
-                                                                    </button>
+                                                                <td><?php
+                                                                    $stmts = $conn->prepare('select * from users');
+                                                                    $stmts->execute();
+                                                                    $users = $stmts->fetchAll(PDO::FETCH_BOTH);
+                                                                    foreach ($users as $user) {
+                                                                        if($journale['iduser']==$user['id']){
+                                                                            echo $user['nom_complet'];
+                                                                        }
+                                                                    }
 
-                                                                    <button type="button" class="btn btn-xs btn-warning pull-right" data-toggle="modal" data-target="#exampleModal<?php echo $typeCh['idTc']; ?>">
-                                                                        <i class="fa fa-edit"></i>Modifier
-                                                                    </button>
+                                                                        
+                                                                        ?>
+                                                                        <input type="hidden" name="idjournal" value="<?php echo $journale['id']; ?>" />
+                                                                    </td>
+                                                                    <td><?php echo $journale['typedaction']; ?>
+                                                                    </td>
+                                                                    <td><?php echo $journale['datemodification']; ?>
+                                                                    </td>
+                                                                    <td><?php
+                                                                        $page = $journale['page'];
+                                                                        $oldval = $journale['oldval'];
+                                                                        $newval = $journale['newval'];
+                                                                        $date = $journale['datemodification'];
+                                                                        $page = $journale['page'];
+                                                                        $type = $journale['typedaction'];
+                                                                        $txt = "une modification dans la page $page de $oldval est remplacee par $newval";
+                                                                        echo $txt;
+                                                                        ?>
+                                                                    </td>
+                                                                    <td width="15%">
+                                                                        
+                                                                        <button name="deleteMod" class="btnSuppDept btn btn-xs btn-danger pull-right" >
+                                                                            <i class="fa fa-trash"></i>  
+                                                                        </button>
 
 
 
-                                                                    <div class="modal fade fixed" aria-labelledby="myModalLabel" id="exampleModal<?php echo $typeCh['idTc']; ?>" tabindex="-1" role="dialog"  aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header well">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                        <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                    <h3>Modification d'un type de chambre</h3>
-                                                                                </div>
-                                                                                <form class='form-horizontal' method="post" action="edit.php">
-                                                                                    <div class='modal-body'>
-                                                                                        <center>
-                                                                                            <div class='form-group'>
-                                                                                                <label class='col-sm-6 control-label'> Type</label>
-                                                                                                <div class='col-sm-6'>
-                                                                                                    <input type='text' class='form-control' name='typech' value="<?php echo $typeCh['type']; ?>"/>
-                                                                                                    <input type='hidden' class='form-control' name='idtch' value="<?php echo $typeCh['idTc']; ?>"/>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <br><br>
 
-                                                                                            <br><br>
-                                                                                            <div class='form-group'>
-                                                                                                <label class='col-sm-6 control-label'> Nombre max de pax</label>
-                                                                                                <div class='col-sm-6'>
-                                                                                                    <input type='text' class='form-control' name='nbpx' value="<?php echo $typeCh['nbreMaxPax']; ?>"/>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </center>
-                                                                                    </div>
-                                                                                    <div class='modal-footer'>
-                                                                                        <div class='pull-right'>
-                                                                                            <div id='envoyer'>
-                                                                                                <button type='submit' class='btn btn-primary' name='edittypech' style='float: right'>Enregistrer</button>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <?php
-                                                        }
-                                                        ?>
 
-                                                        <!--{% endfor %}-->
-                                                    </tbody>
-                                                </table>
-                                            </form>
+                                                                    </td>
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                            ?>
+
+                                                            <!--{% endfor %}-->
+                                                        </tbody>
+                                                    </table>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
-                                    <div class="x_title">
-                                        <h2>Utilisateurs bloqués</h2>
-                                        <ul class="nav navbar-right panel_toolbox">
-                                            <li>
-                                                <button class="btn btn-xs btn-success" title="Ajouter" data-toggle="modal" data-target="#ModalAjoutChambre"><i class="fa fa-plus"></i> Ajouter</button>
-                                            </li>
-                                        </ul>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                    <div class="x_content">
-                                        <div class="table-responsive">
-                                            <form method="post" action="delete.php">
-                                                <table id="table2" class="table table-striped table-bordered " cellspacing="0" width="100%">
-                                                     <thead style="background:#4B5F71;color:white;">
-                                                        <tr>
-                                                            <th>Nom Complet</th>
-                                                            <th>UserName</th> 
-                                                            <th>Email</th>
-                                                            <th>Connecté</th> 
-                                                            <th>Tel</th>
-                                                            <th>Admin</th> 
-                                                            <th width="25%"> </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <!--{% for dep in dep %}-->
-                                                        <?php
-                                                        $references = array();
-                                                        $stmt = $conn->prepare('select * from users where blocked=1');
-                                                        $stmt->execute();
-                                                        $users = $stmt->fetchAll(PDO::FETCH_BOTH);
-                                                        foreach ($users as $user) {
-                                                            ?>
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+                                        <div class="x_title">
+                                            <h2>Utilisateurs bloqués</h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li>
+                                                    <button class="btn btn-xs btn-success" title="Ajouter" data-toggle="modal" data-target="#ModalAjoutChambre"><i class="fa fa-plus"></i> Ajouter</button>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+                                            <div class="table-responsive">
+                                                <form method="post" action="delete.php">
+                                                    <table id="table2" class="table table-striped table-bordered " cellspacing="0" width="100%">
+                                                        <thead style="background:#4B5F71;color:white;">
                                                             <tr>
-                                                                <td><?php echo $user['nom_complet']; ?>
-                                                                    <input type="hidden" name="iduser" value="<?php echo $user['id']; ?>" />
-                                                                </td>
-                                                                <td><?php echo $user['username']; ?>
-                                                                </td>
-                                                                <td><?php echo $user['email']; ?>
-                                                                </td>
-                                                                <td><?php if ($user['type'] == '1') echo 'En ligne'; else echo 'Hors ligne'; ?>
-                                                                </td>
-                                                                <td><?php echo $user['tel']; ?>
-                                                                </td>
-                                                                <td><?php if ($user['admin'] == '1') echo 'Admin'; else echo '-----'; ?> 
-                                                                </td>
-                                                                <td width="20%">
-                                                                    
-                                                                     <button name="unarchiveuser" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
-                                                                        <i class="fa fa-undo"></i> Deblocker
-                                                                    </button>
-
-                                                                </td>
+                                                                <th>Nom Complet</th>
+                                                                <th>UserName</th> 
+                                                                <th>Email</th>
+                                                                <th>Connecté</th> 
+                                                                <th>Tel</th>
+                                                                <th>Admin</th> 
+                                                                <th width="25%"> </th>
                                                             </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <!--{% for dep in dep %}-->
                                                             <?php
-                                                        }
-                                                        ?>
+                                                            $references = array();
+                                                            $stmt = $conn->prepare('select * from users where blocked=1');
+                                                            $stmt->execute();
+                                                            $users = $stmt->fetchAll(PDO::FETCH_BOTH);
+                                                            foreach ($users as $user) {
+                                                                ?>
+                                                                <tr>
+                                                                    <td><?php echo $user['nom_complet']; ?>
+                                                                        <input type="hidden" name="iduser" value="<?php echo $user['id']; ?>" />
+                                                                    </td>
+                                                                    <td><?php echo $user['username']; ?>
+                                                                    </td>
+                                                                    <td><?php echo $user['email']; ?>
+                                                                    </td>
+                                                                    <td><?php
+                                                                        if ($user['type'] == '1')
+                                                                            echo 'En ligne';
+                                                                        else
+                                                                            echo 'Hors ligne';
+                                                                        ?>
+                                                                    </td>
+                                                                    <td><?php echo $user['tel']; ?>
+                                                                    </td>
+                                                                    <td><?php
+                                                                        if ($user['admin'] == '1')
+                                                                            echo 'Admin';
+                                                                        else
+                                                                            echo '-----';
+                                                                        ?> 
+                                                                    </td>
+                                                                    <td width="20%">
 
-                                                        <!--{% endfor %}-->
-                                                    </tbody>
-                                                </table>
-                                            </form>
+                                                                        <button name="unarchiveuser" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
+                                                                            <i class="fa fa-undo"></i> Deblocker
+                                                                        </button>
+
+                                                                    </td>
+                                                                </tr>
+        <?php
+    }
+    ?>
+
+                                                            <!--{% endfor %}-->
+                                                        </tbody>
+                                                    </table>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="clearfix"></div>
+                <div class="clearfix"></div>
 
-            <!--div class="clearfix"></div-->
+                <!--div class="clearfix"></div-->
+            </div>
         </div>
     </div>
-</div>
 
 
-<!-- /page content -->
-<?php
-include('modal_add.php');
-include('footer.php');
-?>
+    <!-- /page content -->
+    <?php
+    include('modal_add.php');
+    include('footer.php');
+    ?>
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>

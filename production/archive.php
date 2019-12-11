@@ -30,7 +30,12 @@ include('header.php');
                 <div class="x_panel">
                     <div class="x_title">
                         <h2><i class="fa fa-bars"></i> Tables statiques</h2>
-
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a  href="configuration.php">
+                                    <button class="btn btn-s btn-info" title="Tables Stasitiques"><i class="fa fa-archive"></i> Tables statiques</button>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -50,7 +55,7 @@ include('header.php');
                             <div id="myTabContent" class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                                     <div class="x_title">
-                                        <h2>Références</h2>
+                                        <h2>Références </h2>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="x_content">
@@ -85,7 +90,7 @@ include('header.php');
                                                                     <button name="deleteref" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
                                                                         <i class="fa fa-trash"></i> Supprimer
                                                                     </button>
--->
+                                                                    -->
 
                                                                     <button name="unarchiveref" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
                                                                         <i class="fa fa-undo"></i> Desarchiver
@@ -141,10 +146,10 @@ include('header.php');
                                                                 </td>
                                                                 <td width="20%">  <!--   name="deletetypechooooo" -->
                                                                     <ul class="nav navbar-right panel_toolbox">
-                                                                       <!-- <button data-toggle="modal" data-target="#deletetypechooooo" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
-                                                                            <i class="fa fa-trash"></i> Supprimer
-                                                                        </button>-->
-                                                                       
+                                                                        <!-- <button data-toggle="modal" data-target="#deletetypechooooo" class="btnSuppDept btn btn-xs btn-danger pull-right" title="Supprimer">
+                                                                             <i class="fa fa-trash"></i> Supprimer
+                                                                         </button>-->
+
                                                                         <ul class="nav navbar-right panel_toolbox">
                                                                             <button name="unarchivetypech" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
                                                                                 <i class="fa fa-undo"></i> Desarchiver
@@ -171,7 +176,7 @@ include('header.php');
                                     </div>
                                     <div class="x_content">
                                         <div class="table-responsive">
-                                            <form method="post" action="delete.php">
+                                            <form method="post" action="edit.php">
                                                 <table id="table2" class="table table-striped table-bordered " cellspacing="0" width="100%">
                                                     <thead style="background:#4B5F71;color:white;">
                                                         <tr>
@@ -231,7 +236,7 @@ include('header.php');
 
                                                                 </td>
                                                             </tr> 
-                                                           <?php
+                                                            <?php
                                                         }
                                                         ?>
 
@@ -300,7 +305,7 @@ include('header.php');
                                     </div>
                                 </div>
 
-                              
+
                             </div>
                         </div>
 
@@ -317,11 +322,11 @@ include('header.php');
 include('footer.php');
 ?> 
 <script language="javascript" >
-function deletetype(idType){
-    if(confirm("Do you want to ....")){
-        window.location.href='modal_delete.php?del_id='+idType+'';
+    function deletetype(idType) {
+        if (confirm("Do you want to ....")) {
+            window.location.href = 'modal_delete.php?del_id=' + idType + '';
+        }
     }
-}
 </script>
 
 <script src="../vendors/jquery/dist/jquery.min.js"></script>

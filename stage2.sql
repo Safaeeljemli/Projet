@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 03 Décembre 2019 à 12:10
+-- Généré le :  Mer 11 Décembre 2019 à 09:58
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
@@ -55,8 +55,8 @@ CREATE TABLE `chambre` (
 --
 
 INSERT INTO `chambre` (`idChambre`, `nomCode`, `descriptif`, `statut`, `capacity`, `idtypechambre`) VALUES
-(8, 'chambre1', '1er etage', 0, 2, 4),
-(9, 'cham3', '2eme etage', 0, 3, 6),
+(8, 'chambre1', '1er etage', 1, 2, 4),
+(9, 'cham3', '2eme etage', 1, 3, 6),
 (10, 'cham2', '1er etage', 1, 2, 5);
 
 -- --------------------------------------------------------
@@ -84,9 +84,52 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`idClient`, `nom`, `prenom`, `age`, `sexe`, `pieceIdentite`, `nationalite`, `numTel`, `email`, `situationFamiliale`, `statut`) VALUES
-(11, 'pppppppp', 'rrrrrrrr', 34, 'Homme', 'eert', 'hhhhh', 987654, 'dfghjkl@ggg', 'Celibataire', 1),
-(12, 'eeee', 'rrrr', 13, 'Femme', 'bbbb', 'dddddddd', 345666666, 'wertyuio@ff', 'Celibataire', 1),
-(13, 'uuuuuuuuuu', 'uiuiu', 23, 'Homme', 'yyyy', 'maroc', 654333, 'wsdf@ff', 'Celibataire', 1);
+(11, 'ssaa', 'aaaaaa', 50, 'Homme', 'ee44356', 'egypte', 645432345, 'hoy@hhh', 'Celibataire', 1),
+(13, 'uuuuuuuuuu', 'uiuiu', 44, 'Femme', 'yyyy', 'maroc', 654333, 'wsdf@ff', 'Celibataire', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `history`
+--
+
+CREATE TABLE `history` (
+  `id` int(11) NOT NULL,
+  `datelogin` datetime NOT NULL,
+  `type` int(11) NOT NULL,
+  `iduser` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `journale`
+--
+
+CREATE TABLE `journale` (
+  `id` int(20) NOT NULL,
+  `datemodification` datetime NOT NULL,
+  `newval` varchar(500) NOT NULL,
+  `oldval` varchar(500) NOT NULL,
+  `typedaction` varchar(50) NOT NULL,
+  `page` varchar(50) NOT NULL,
+  `iduser` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `journale`
+--
+
+INSERT INTO `journale` (`id`, `datemodification`, `newval`, `oldval`, `typedaction`, `page`, `iduser`) VALUES
+(11, '2019-12-04 16:56:06', 'nom= sofi prenom= sofi', 'nom= ssssss prenom= eeeee', 'modification', 'client', 7),
+(12, '2019-12-04 17:03:02', ' age= safae', ' age= 54', 'modification', 'client', 7),
+(13, '2019-12-04 17:04:20', ' age= safae', ' age= 66', 'modification', 'client', 7),
+(14, '2019-12-04 17:05:03', ' age= uiuiu', ' age= 44', 'modification', 'client', 7),
+(15, '2019-12-04 17:06:07', ' age= eeeee', ' age= eeeee', 'modification', 'client', 7),
+(16, '2019-12-09 09:51:48', 'nom= Femme cin= eert tel= 987654 nationalitÃ©= hhhhh email= dfghjkl@ggg', 'nom= Homme cin= ee44356 tel= 0645432345 nationalitÃ©= egypte email= hoy@hhh', 'modification', 'client', 1),
+(17, '2019-12-09 11:25:05', 'nomref= test3', 'nomref= tesr', 'modification', 'reference', 1),
+(18, '2019-12-09 11:25:48', ' couleur= #55aa7d', ' couleur= #05fa6d', 'modification', 'reference', 1),
+(22, '2019-12-09 14:02:51', 'type= rtrrvv couleur= #01feeb', 'type= ttt couleur= ', 'modification', 'typereservation', 1);
 
 -- --------------------------------------------------------
 
@@ -106,9 +149,10 @@ CREATE TABLE `reference` (
 --
 
 INSERT INTO `reference` (`id`, `nom`, `couleur`, `statut`) VALUES
-(10, 'Direct', '#30cf74', 0),
-(11, 'Expedia', '#5ba4a0', 0),
-(16, 'rouge', '#ff0000', 0);
+(10, 'Direct', '#37c86d', 1),
+(11, 'Expedia', '#5ba4a0', 1),
+(16, 'rouge', '#ff0000', 1),
+(17, 'tesr', '#05fa6d', 1);
 
 -- --------------------------------------------------------
 
@@ -164,8 +208,8 @@ CREATE TABLE `typechambre` (
 --
 
 INSERT INTO `typechambre` (`idTc`, `type`, `nbrChambre`, `nbreMaxPax`, `statut`) VALUES
-(4, 'double', 4, 2, 0),
-(5, 'single', 2, 1, 0),
+(4, 'double', 4, 2, 1),
+(5, 'single', 2, 1, 1),
 (6, 'triple', 6, 3, 1);
 
 -- --------------------------------------------------------
@@ -186,10 +230,10 @@ CREATE TABLE `typereservation` (
 --
 
 INSERT INTO `typereservation` (`id`, `type`, `couleur`, `statut`) VALUES
-(2, 'typeres5', '', 0),
-(3, 'Typereservation', '#ecdb40', 0),
-(4, 'eeee', '#01feeb', 0),
-(5, 'uuuuu', '#e2e089', 0),
+(2, 'typeres5', '', 1),
+(3, 'Typereservation', '#ecdb40', 1),
+(4, 'ttt', '#0086ff', 1),
+(5, 'uuuuu', '#e2e089', 1),
 (6, 'ooooooooooooooooooooo', '#c8eeec', 1),
 (7, 'tttttt', '#13a451', 1);
 
@@ -217,8 +261,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `type`, `pwd`, `nom_complet`, `tel`, `img`, `blocked`, `admin`) VALUES
-(1, 'safa', 'eljemlisafae@gmail.com', 0, 'safa', 'EL JEMLI Safae', 675765432, NULL, 0, 1),
-(7, 'badr', 'badr@gmail.com', 0, '$2y$12$cJIUp.IwoPWICIHD3l9S7.V.HRj5FEwP3kUV6AwtGbLx6P80tlwaC', 'badr', 98765432, '0', 0, 1);
+(1, 'safa', 'safae@gmail.com', 1, 'ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff', 'Safae aa', 675765432, NULL, 0, 1),
+(7, 'badr', 'badr@gmail.com', 0, 'ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff', 'badr', 98765432, '0', 0, 1),
+(8, 'test', 'test@test', 0, 'ee26b0dd4af7e749aa1a8ee3c10ae9923f618980772e473f8819a5d4940e0db27ac185f8a0e1d5f84f88bc887fd67b143732c304cc5fa9ad8e6f57f50028a8ff', 'test', 123456, '0', 0, 1);
 
 --
 -- Index pour les tables exportées
@@ -243,6 +288,21 @@ ALTER TABLE `chambre`
 --
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`idClient`);
+
+--
+-- Index pour la table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `iduser` (`iduser`),
+  ADD KEY `iduser_2` (`iduser`);
+
+--
+-- Index pour la table `journale`
+--
+ALTER TABLE `journale`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `iduser` (`iduser`);
 
 --
 -- Index pour la table `reference`
@@ -296,17 +356,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `chambre`
 --
 ALTER TABLE `chambre`
-  MODIFY `idChambre` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idChambre` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
   MODIFY `idClient` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
+-- AUTO_INCREMENT pour la table `history`
+--
+ALTER TABLE `history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `journale`
+--
+ALTER TABLE `journale`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
 -- AUTO_INCREMENT pour la table `reference`
 --
 ALTER TABLE `reference`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT pour la table `reservations`
 --
@@ -331,7 +401,7 @@ ALTER TABLE `typereservation`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Contraintes pour les tables exportées
 --
@@ -347,6 +417,18 @@ ALTER TABLE `accompagnant`
 --
 ALTER TABLE `chambre`
   ADD CONSTRAINT `chambre_ibfk_1` FOREIGN KEY (`idtypechambre`) REFERENCES `typechambre` (`idTc`);
+
+--
+-- Contraintes pour la table `history`
+--
+ALTER TABLE `history`
+  ADD CONSTRAINT `history_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `journale`
+--
+ALTER TABLE `journale`
+  ADD CONSTRAINT `journale_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `reservations`

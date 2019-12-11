@@ -30,7 +30,12 @@ include('header.php');
                 <div class="x_panel">
                     <div class="x_title">
                         <h2><i class="fa fa-bars"></i> Archive Clients</h2>
-
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a  href="clients.php">
+                                    <button class="btn btn-s btn-info" title="clients"><i class="fa fa-archive"></i>Listes Clients</button>
+                                </a>
+                            </li>
+                        </ul>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -106,7 +111,7 @@ include('header.php');
                                                                 </td>
 
                                                                 <td width="20%">
-                                                                    
+
                                                                     <button name="unarchiveclient" class="btnSuppDept btn btn-xs btn-info pull-right" title="Desarchiver">
                                                                         <i class="fa fa-undo"></i> Desarchiver
                                                                     </button>

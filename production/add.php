@@ -21,7 +21,7 @@ if (isset($_POST['adduser'])) {
         $usrn = $_POST['name'];
         $mail = $_POST['emailuser'];
         $pwd = $_POST['pswuser'];
-        $hpwd=password_hash('$pwd',PASSWORD_BCRYPT, array( 'cost' => 12 ));
+        $hpwd= hash('sha512',$pwd);
         $type = $_POST['type'];
         $tel = $_POST['tel'];
         $admin = $_POST['admin'];

@@ -29,7 +29,7 @@
                         </li>
                         <li><a href="javascript:;">Help</a></li>
                         <li>
-                            <form action="logout.inc.php" method="POST"><button class="fa fa-sign-out pull-right" type="submit" name="submit"> Se déconnecter</button></a></form>
+                            <form action="logout.inc.php" method="POST"><button class="fa fa-sign-out pull-right" type="submit" name="submit"><input type='hidden' class='form-control' name='idsession' value="<?php echo $_SESSION['userId']; ?>" /> Se déconnecter</button></a></form>
                         </li>
                     </ul>
                 </li>

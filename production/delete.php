@@ -122,6 +122,27 @@ if (isset($_POST['deleteref'])) {
     }
 }
 
+echo '++++++++';
+if (isset($_POST['deleteMod'])) {
+    echo '--------------------';
+    try {
+        $idd = $_POST['idjournal'];
+        echo $id;
+        $sql = "DELETE FROM journale WHERE id=$idd";
+
+// Prepare statement
+        $stmt = $conn->prepare($sql);
+
+// execute the query
+        $stmt->execute();
+
+// echo a message to say the UPDATE succeeded
+        echo $stmt->rowCount() . " records UPDATED successfully";
+        header('location:admin1.php');
+    } catch (PDOException $e) {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+}
 
 /* * *** Type Chambres ****** */
 if (isset($_POST['archivetypech'])) {
@@ -136,8 +157,8 @@ if (isset($_POST['archivetypech'])) {
         $stmt->execute();
 
 // echo a message to say the UPDATE succeeded
-        echo $stmt->rowCount() . " records UPDATED successfully";
-        header('location:configuration.php');
+        //echo $stmt->rowCount() . " records UPDATED successfully";
+        //header('location:configuration.php');
     } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }

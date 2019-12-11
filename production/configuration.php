@@ -33,8 +33,9 @@ include('header.php');
                     <div class="x_title">
                         <h2><i class="fa fa-bars"></i> Configuration des tables statiques</h2>
                         <ul class="nav navbar-right panel_toolbox">
-                            <li>
-                                <button class="btn btn-s btn-info" title="Archives"><i class="fa fa-archive"></i> Archives</button>
+                            <li><a  href="archive.php">
+                                    <button class="btn btn-s btn-info" title="Archives"><i class="fa fa-archive"></i> Archives</button>
+                                </a>
                             </li>
                         </ul>
                         <div class="clearfix"></div>
@@ -120,6 +121,7 @@ include('header.php');
                                                                                                 <div class='col-sm-6'>
                                                                                                     <input type='text' class='form-control' name='nomref' value="<?php echo $reference['nom']; ?>"/>
                                                                                                     <input type='hidden' class='form-control' name='idref' value="<?php echo $reference['id']; ?>"/>
+                                                                                                    <input type='hidden' class='form-control' name='idsession' value="<?php echo $_SESSION['userId']; ?>" />
                                                                                                 </div>
                                                                                             </div>
                                                                                             <br><br>
@@ -222,6 +224,7 @@ include('header.php');
                                                                                                 <div class='col-sm-6'>
                                                                                                     <input type='text' class='form-control' name='typech' value="<?php echo $typeCh['type']; ?>"/>
                                                                                                     <input type='hidden' class='form-control' name='idtch' value="<?php echo $typeCh['idTc']; ?>"/>
+                                                                                                    <input type='hidden' class='form-control' name='idsession' value="<?php echo $_SESSION['userId']; ?>" />
                                                                                                 </div>
                                                                                             </div>
                                                                                             <br><br>
@@ -346,6 +349,7 @@ include('header.php');
                                                                                                 <div class='col-sm-6'>
                                                                                                     <input type='text' class='form-control' name='nomcodecha' value="<?php echo $chambre['nomCode']; ?>"/>
                                                                                                     <input type='hidden' class='form-control' name='idch' value="<?php echo $chambre['idChambre']; ?>"/>
+                                                                                                    <input type='hidden' class='form-control' name='idsession' value="<?php echo $_SESSION['userId']; ?>" />
                                                                                                 </div>
                                                                                             </div>
                                                                                             <br><br>
@@ -406,7 +410,7 @@ include('header.php');
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="profile-tab">
                                     <div class="x_title">
-                                        <h2 style="color:black;">Types de reservations</h2>
+                                        <h2 >Types de reservations</h2>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li>
                                                 <button class="btn btn-xs btn-success" title="Ajouter" data-toggle="modal" data-target="#ModalAjoutTypeRes"><i class="fa fa-plus"></i> Ajouter</button>
@@ -468,6 +472,7 @@ include('header.php');
                                                                                                 <div class='col-sm-6'>
                                                                                                     <input type='text' class='form-control' name='typeres' value="<?php echo $typeRes['type']; ?>"/>
                                                                                                     <input type='hidden' class='form-control' name='idtypere' value="<?php echo $typeRes['id']; ?>"/>
+                                                                                                    <input type='hidden' class='form-control' name='idsession' value="<?php echo $_SESSION['userId']; ?>" />
                                                                                                 </div>
                                                                                             </div>
                                                                                             <br><br>

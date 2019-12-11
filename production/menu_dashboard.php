@@ -20,7 +20,7 @@
                                 if (isset($_SESSION['nom_complet'])) {
                                     echo $_SESSION['nom_complet'];
                                 } else {
-                                    header("Location: login2.php");
+                                    header("Location: login.php");
                                 }
                                 ?></h2>
                         </div>
@@ -45,6 +45,7 @@
                                 <li><a><i class="fa fa-table"></i> Configuration <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="configuration.php">Tables statiques</a></li>
+                                        <li><a href="admin1.php">Utilisateurs</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-bar-chart-o"></i> Statistique </a>

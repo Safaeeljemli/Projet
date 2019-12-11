@@ -31,6 +31,12 @@ include('header.php');
                         <div class="x_panel">
                             <div class="x_title">
                                 <h2><i class="fa fa-bars"></i> Clients</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a  href="archive_clients.php">
+                                    <button class="btn btn-s btn-info" title="ArchiveClients"><i class="fa fa-archive"></i>Archives</button>
+                                </a>
+                            </li>
+                        </ul>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
@@ -149,7 +155,7 @@ include('header.php');
                                                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                             <span aria-hidden="true">&times;</span>
                                                                                         </button>
-                                                                                        <h3>Modification d'un client </h3>
+                                                                                        <h3>Modification d'un client</h3>
                                                                                     </div>
                                                                                     <form class='form-horizontal' method="post" action="edit.php">
                                                                                         <div class='modal-body'>
@@ -160,6 +166,7 @@ include('header.php');
                                                                                                     <div class='col-sm-6'>
                                                                                                         <input type='text' class='form-control' name='nomcli' value="<?php echo $client['nom']; ?>" />
                                                                                                         <input type='hidden' class='form-control' name='idcl' value="<?php echo $client['idClient']; ?>" />
+                                                                                                        <input type='hidden' class='form-control' name='idsession' value="<?php echo $_SESSION['userId']; ?>" />
                                                                                                     </div>
                                                                                                 </div><br><br>
                                                                                                 <div class='form-group'>
@@ -180,7 +187,8 @@ include('header.php');
                                                                                                         <select name='sexe' class='form-control' value='<?php echo $client['sexe']; ?>'>
 
                                                                                                             <option value='Femme'><?php echo $client['sexe']; ?></option>
-                                                                                                            <option value='Homme'><?php if ($client['sexe'] == 'Femme') echo 'Homme'; else echo 'Femme'; ?></option>
+                                                                                                            <option value='Homme'><?php if ($client['sexe'] == 'Femme') echo 'Homme';
+                                                                    else echo 'Femme'; ?></option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
@@ -214,8 +222,11 @@ include('header.php');
                                                                                                     <div class='col-sm-6'>
                                                                                                         <select name='situationf' class='form-control' value='<?php echo $client['situationFamiliale']; ?>'>
                                                                                                             <option value='Celibataire'><?php echo $client['situationFamiliale']; ?>Célibataire</option>
-                                                                                                            <option value='Marié'><?php if ($client['situationFamiliale'] == 'Célibataire') echo 'Marié';
-                                                                    else echo 'Célibataire'; ?>Marié</option>
+                                                                                                            <option value='Marié'><?php if ($client['situationFamiliale'] == 'Célibataire')
+                                                                        echo 'Marié';
+                                                                    else
+                                                                        echo 'Célibataire';
+                                                                    ?>Marié</option>
                                                                                                         </select>
                                                                                                     </div>
                                                                                                 </div>
@@ -259,10 +270,10 @@ include('header.php');
                 </div>
             </div>
         </div>
-        <?php
-        // include('modal_add.php');
-        include('footer.php');
-        ?> 
+<?php
+// include('modal_add.php');
+include('footer.php');
+?> 
         <!-- jQuery -->
         <script src="../vendors/jquery/dist/jquery.min.js"></script>
         <!-- Bootstrap -->

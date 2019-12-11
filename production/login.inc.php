@@ -1,10 +1,14 @@
 <?php
 
+/*
+  if (isset($_GET['error'])==true) {
+  echo '<font color="#FF00000"><p align="center"> login ou mot de passe incorrect</p></font>';
+  } */
 if (isset($_POST['sbutton'])) {
     include 'dbh.inc.php';
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];
-    $hpwd = password_hash('$password', PASSWORD_BCRYPT, array('cost' => 12));
+    $hpwd2 = hash('sha512', $password);
     echo $mailuid;
     echo '-----------------------';
     echo $password;
@@ -22,10 +26,9 @@ if (isset($_POST['sbutton'])) {
             if ($user['username'] == $mailuid || $user['email'] == $mailuid) {
                 echo $user['email'];
                 echo 'haniiii';
-                echo $hpwd;
                 echo $user['pwd'];
-                if ($user['pwd'] == $password) {
-                    $id=$user['id'];
+                if ($user['pwd'] == $hpwd2) {
+                    $id = $user['id'];
                     session_start();
                     $_SESSION['userId'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
@@ -43,7 +46,10 @@ if (isset($_POST['sbutton'])) {
                     }
                     header('location:admin1.php');
                 } else {
+                    $message = "Username and/or Password incorrect.\\nTry again.";
+                    
                     header('location:login.php');
+                    print 'incorrect username or password.';
                     exit();
                 }
             }
